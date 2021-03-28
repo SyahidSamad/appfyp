@@ -25,6 +25,7 @@ class MyHomePage extends StatelessWidget {
             //Categories(),
             CategoriesText(),
             Cards(),
+            Text('Hello')
           ],
         ));
   }

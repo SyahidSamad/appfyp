@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:appfyp/styles/globalColor.dart';
 import 'package:appfyp/styles/globalStyles.dart';
 import 'package:appfyp/view/addCategory.dart';
@@ -17,7 +19,7 @@ class CategoryList extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: 10 + 1,
                 itemBuilder: (context, int) =>
-                    int == 0 ? Container(width: 50) : circleItem()),
+                    int == 0 ? Container(width: 50) : circleItem(context)),
             addButton(context),
           ],
         ));
@@ -43,7 +45,7 @@ class CategoryList extends StatelessWidget {
     );
   }
 
-  Widget circleItem() {
+  Widget circleItem(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -55,6 +57,23 @@ class CategoryList extends StatelessWidget {
               child: InkWell(
                 onLongPress: () {
                   print('long tap');
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return Dialog(
+                            child: Container(
+                                width: 310,
+                                height: 168,
+                                color: Colors.white,
+                                child: Text(
+                                  'Your Action',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18),
+                                )));
+                      });
                 },
                 onTap: () {
                   print('tap');

@@ -1,5 +1,6 @@
 import 'package:appfyp/styles/globalColor.dart';
 import 'package:appfyp/styles/globalStyles.dart';
+import 'package:appfyp/view/addItemScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,7 +11,7 @@ class CategoryPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 36),
       child: Column(
         children: [
-          categoryName(),
+          categoryName(context),
           Expanded(child: listOfItem()),
           SizedBox(height: 14)
         ],
@@ -18,7 +19,7 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  Widget categoryName() {
+  Widget categoryName(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -26,13 +27,19 @@ class CategoryPage extends StatelessWidget {
           'Animals',
           style: getFont(24, FontWeight.bold),
         ),
-        addItemButton(),
+        addItemButton(context),
       ],
     );
   }
 
-  Widget addItemButton() {
+  Widget addItemButton(BuildContext context) {
     return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AddItemScreen()),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
             color: textColor,
@@ -49,6 +56,7 @@ class CategoryPage extends StatelessWidget {
 
   Widget listOfItem() {
     return Scrollbar(
+      thickness: 8,
       child: GridView.builder(
           padding: EdgeInsets.only(bottom: 400),
           //shrinkWrap: true,
@@ -63,14 +71,91 @@ class CategoryPage extends StatelessWidget {
   }
 
   Widget itemCard() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        alignment: Alignment.center,
-        child: Text('Name'),
-        decoration: BoxDecoration(
-            color: Colors.amber, borderRadius: BorderRadius.circular(15)),
+    return Card(
+      elevation: 2,
+      child: SizedBox(
+        //height: 100,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: InkWell(
+                onTap: () {},
+                splashColor: splashColor,
+                child: Ink(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(4.0),
+                          topRight: Radius.circular(4.0)),
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/gambartry.jpeg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [_simplePopup()],
+                        )
+                      ],
+                    )),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: bottomCardItemColor,
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(4.0),
+                        bottomRight: Radius.circular(4.0))),
+                child: Center(
+                    child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 14),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                          child: Icon(
+                            FontAwesomeIcons.music,
+                            color: textColor,
+                            size: 14,
+                          ),
+                          onTap: () {}),
+                      Text(
+                        "Bottom",
+                        style: getFont(14, FontWeight.w500),
+                      ),
+                      InkWell(
+                          child: Icon(
+                            FontAwesomeIcons.play,
+                            size: 14,
+                            color: textColor,
+                          ),
+                          onTap: () {}),
+                    ],
+                  ),
+                )),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+  Widget _simplePopup() => PopupMenuButton<int>(
+        //padding: EdgeInsets.only(left: 14),
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("First"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Second"),
+          ),
+        ],
+      );
 }

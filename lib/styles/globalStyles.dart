@@ -1,3 +1,4 @@
+import 'package:appfyp/styles/globalColor.dart';
 import 'package:flutter/material.dart';
 
 TextStyle getFont(double fontSize, FontWeight fontWeight, [Color colors]) {
@@ -11,11 +12,14 @@ TextStyle getFont(double fontSize, FontWeight fontWeight, [Color colors]) {
       fontWeight: fontWeight);
 }
 
-BoxDecoration getDeco(Color color) {
-  return BoxDecoration(
-    borderRadius: BorderRadius.all(
+BoxDecoration getDeco(Color color,
+    [BorderRadius radiusType = const BorderRadius.all(
       Radius.circular(4.0),
     ),
+    Border border]) {
+  return BoxDecoration(
+    border: border == null ? null : border,
+    borderRadius: radiusType,
     color: color,
   );
 }

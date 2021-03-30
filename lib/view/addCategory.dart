@@ -46,7 +46,7 @@ class AddCategoryScreen extends StatelessWidget {
                   height: 14,
                 ),
                 Text(
-                  'Add Item.',
+                  'Add Category.',
                   style: getFont(24, FontWeight.bold),
                 ),
                 SizedBox(

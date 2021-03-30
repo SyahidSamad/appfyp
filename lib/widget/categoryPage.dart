@@ -58,7 +58,7 @@ class CategoryPage extends StatelessWidget {
     return Scrollbar(
       thickness: 8,
       child: GridView.builder(
-          padding: EdgeInsets.only(bottom: 400),
+          padding: EdgeInsets.only(bottom: 100),
           //shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
@@ -85,6 +85,9 @@ class CategoryPage extends StatelessWidget {
                 splashColor: splashColor,
                 child: Ink(
                     decoration: BoxDecoration(
+                      border: null,
+                      // TODO: Add border
+                      // border: Border.all(width: 2, color: Colors.green),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0)),
@@ -150,11 +153,40 @@ class CategoryPage extends StatelessWidget {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("First"),
+            child: Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.edit,
+                  size: 14,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Edit",
+                  style: getFont(14, FontWeight.w500),
+                ),
+              ],
+            ),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Second"),
+            child: Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.trash,
+                  size: 14,
+                  color: alertColor,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Delete",
+                  style: getFont(14, FontWeight.w500, alertColor),
+                ),
+              ],
+            ),
           ),
         ],
       );

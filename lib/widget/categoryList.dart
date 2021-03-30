@@ -27,21 +27,25 @@ class CategoryList extends StatelessWidget {
   }
 
   Widget addButton(BuildContext context) {
-    return Container(
-      height: 42,
-      decoration: BoxDecoration(
-        color: buttonColor,
-        borderRadius: BorderRadius.horizontal(
-            right: Radius.circular(10), left: Radius.circular(0)),
-      ),
-      child: IconButton(
-        icon: Icon(FontAwesomeIcons.plus),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AddCategoryScreen()),
-          );
-        },
+    return Material(
+      color: Colors.transparent,
+      elevation: 20,
+      child: Container(
+        height: 42,
+        decoration: BoxDecoration(
+          color: buttonColor,
+          borderRadius: BorderRadius.horizontal(
+              right: Radius.circular(10), left: Radius.circular(0)),
+        ),
+        child: IconButton(
+          icon: Icon(FontAwesomeIcons.plus),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddCategoryScreen()),
+            );
+          },
+        ),
       ),
     );
   }

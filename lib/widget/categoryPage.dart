@@ -58,7 +58,7 @@ class CategoryPage extends StatelessWidget {
     return Scrollbar(
       thickness: 8,
       child: GridView.builder(
-          padding: EdgeInsets.only(bottom: 400),
+          padding: EdgeInsets.only(bottom: 100),
           //shrinkWrap: true,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200,
@@ -85,6 +85,9 @@ class CategoryPage extends StatelessWidget {
                 splashColor: splashColor,
                 child: Ink(
                     decoration: BoxDecoration(
+                      border: null,
+                      // TODO: Add border
+                      // border: Border.all(width: 2, color: Colors.green),
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(4.0),
                           topRight: Radius.circular(4.0)),

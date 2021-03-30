@@ -4,6 +4,7 @@ import 'package:appfyp/styles/globalColor.dart';
 import 'package:appfyp/styles/globalStyles.dart';
 import 'package:appfyp/view/addCategory.dart';
 import 'package:appfyp/view/addItemScreen.dart';
+import 'package:appfyp/widget/dragabbleBottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -57,23 +58,29 @@ class CategoryList extends StatelessWidget {
               child: InkWell(
                 onLongPress: () {
                   print('long tap');
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return Dialog(
-                            child: Container(
-                                width: 310,
-                                height: 168,
-                                color: Colors.white,
-                                child: Text(
-                                  'Your Action',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18),
-                                )));
-                      });
+                  showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => ChooseTimeDialog(),
+                  );
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return Dialog(
+                  //           child: Container(
+                  //               width: 310,
+                  //               height: 168,
+                  //               color: Colors.white,
+                  //               child: Text(
+                  //                 'Your Action',
+                  //                 style: TextStyle(
+                  //                     fontFamily: 'Poppins',
+                  //                     color: Colors.black,
+                  //                     fontWeight: FontWeight.w500,
+                  //                     fontSize: 18),
+                  //               )));
+                  //     });
                 },
                 onTap: () {
                   print('tap');

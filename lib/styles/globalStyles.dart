@@ -11,11 +11,12 @@ TextStyle getFont(double fontSize, FontWeight fontWeight, [Color colors]) {
       fontWeight: fontWeight);
 }
 
-BoxDecoration getDeco(Color color) {
-  return BoxDecoration(
-    borderRadius: BorderRadius.all(
+BoxDecoration getDeco(Color color,
+    [BorderRadius radiusType = const BorderRadius.all(
       Radius.circular(4.0),
-    ),
+    )]) {
+  return BoxDecoration(
+    borderRadius: radiusType,
     color: color,
   );
 }

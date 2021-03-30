@@ -7,3 +7,4 @@ Color bottomCardItemColor = Color(0xffAFBED1);
 Color splashColor = Colors.grey[100].withOpacity(0.4);
 Color confirmButtonColor = Color(0xff56CBF9);
 Color clipOvalColor = Color(0xff7FBEEB);
+Color alertColor = Color(0xffB62E2E);

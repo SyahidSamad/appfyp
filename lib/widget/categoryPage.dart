@@ -150,11 +150,40 @@ class CategoryPage extends StatelessWidget {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("First"),
+            child: Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.edit,
+                  size: 14,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Edit",
+                  style: getFont(14, FontWeight.w500),
+                ),
+              ],
+            ),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Second"),
+            child: Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.trash,
+                  size: 14,
+                  color: alertColor,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Delete",
+                  style: getFont(14, FontWeight.w500, alertColor),
+                ),
+              ],
+            ),
           ),
         ],
       );

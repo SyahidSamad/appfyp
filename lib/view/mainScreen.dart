@@ -4,6 +4,7 @@ import 'package:appfyp/widget/categoryList.dart';
 import 'package:appfyp/widget/categoryPage.dart';
 import 'package:appfyp/widget/createSentence.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -34,20 +35,23 @@ class _MainScreenState extends State<MainScreen> {
               CategoryList(),
               Expanded(child: CategoryPage()),
               createSentence ? CreateSentence() : Container(),
+              SizedBox(
+                height: 10,
+              )
             ],
           ),
         ]),
         floatingActionButton: createSentence
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  FloatingActionButton(onPressed: () {}),
-                  FloatingActionButton(onPressed: () {
-                    setState(() {
-                      createSentence = false;
-                    });
-                  }),
-                ],
+            ? FloatingActionButton(
+                onPressed: () {
+                  setState(() {
+                    createSentence = false;
+                  });
+                },
+                child: FaIcon(
+                  FontAwesomeIcons.times,
+                  color: Colors.white,
+                ),
               )
             : ElevatedButton(
                 onPressed: () {

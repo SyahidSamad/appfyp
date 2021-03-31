@@ -33,7 +33,7 @@ class CreateSentence extends StatelessWidget {
               right: Radius.circular(10), left: Radius.circular(0)),
         ),
         child: IconButton(
-          icon: Icon(FontAwesomeIcons.plus),
+          icon: Icon(FontAwesomeIcons.play),
           onPressed: () {},
         ),
       ),
@@ -43,10 +43,13 @@ class CreateSentence extends StatelessWidget {
   Widget wordContainer() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: getDeco(Colors.white),
-        // height: 50,
-        width: 100,
+      child: InkWell(
+        onTap: () {},
+        child: Ink(
+          decoration: getDeco(Colors.white),
+          // height: 50,
+          width: 100,
+        ),
       ),
     );
   }

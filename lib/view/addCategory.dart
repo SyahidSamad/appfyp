@@ -1,10 +1,19 @@
 import 'package:appfyp/styles/globalColor.dart';
 import 'package:appfyp/styles/globalStyles.dart';
+import 'package:appfyp/view/cameraScreen.dart';
 import 'package:appfyp/widget/confirmButton.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddCategoryScreen extends StatelessWidget {
+class AddCategoryScreen extends StatefulWidget {
+  @override
+  _AddCategoryScreenState createState() => _AddCategoryScreenState();
+}
+
+class _AddCategoryScreenState extends State<AddCategoryScreen> {
+  CameraDescription cameraDescription;
+
   final Map<String, Widget> iconInContainer = {
     "Image": FaIcon(
       FontAwesomeIcons.image,
@@ -22,6 +31,7 @@ class AddCategoryScreen extends StatelessWidget {
       color: textColor,
     )
   };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,6 +155,28 @@ class AddCategoryScreen extends StatelessWidget {
                         'Add $name',
                         style: getFont(14, FontWeight.bold),
                       ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      IconButton(
+                          icon: FaIcon(
+                            FontAwesomeIcons.camera,
+                            size: 14,
+                            color: textColor,
+                          ),
+                          onPressed: () async {
+                            final cameras = await availableCameras();
+
+                            // Get a specific camera from the list of available cameras.
+                            cameraDescription = cameras.first;
+                            // TakePictureScreen(camera: cameraDescription);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TakePictureScreen(
+                                      camera: cameraDescription)),
+                            );
+                          })
                     ],
                   ),
                   SizedBox(

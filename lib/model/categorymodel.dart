@@ -1,9 +1,11 @@
 import 'package:appfyp/model/baseModel.dart';
 
 class CategoryModel implements BaseModel {
+  String categoryName;
+  String categoryId;
+
   @override
   toMap() {
-    // TODO: implement toMap
-    throw UnimplementedError();
+    return {};
   }
 }

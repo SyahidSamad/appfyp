@@ -6,6 +6,13 @@ class ItemModel implements BaseModel {
   String pathToSound;
   String pathToVideo;
 
+  ItemModel(data) {
+    this.name = data['name'];
+    this.pathToPicture = data['name'];
+    this.pathToSound = data['pathToSound'];
+    this.pathToVideo = data['pathToVideo'];
+  }
+
   @override
   toMap() {
     return {};

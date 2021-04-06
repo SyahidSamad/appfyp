@@ -1,6 +1,7 @@
-import 'package:appfyp/view/displayPictureScreen.dart';
+import 'package:appfyp/provider/rootProvider.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -43,6 +44,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final imageToListen = context.watch<RootProvider>();
     return Scaffold(
       appBar: AppBar(title: Text('Take a picture')),
       // Wait until the controller is initialized before displaying the
@@ -75,16 +77,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             final image = await _controller.takePicture();
 
             // If the picture was taken, display it on a new screen.
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(
-                  // Pass the automatically generated path to
-                  // the DisplayPictureScreen widget.
-                  imagePath: image?.path,
-                ),
-              ),
-            );
+
+            imageToListen.setCameraImagePath(image?.path);
+            print('Image path: ${image.path}');
+            Navigator.pop(context);
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => DisplayPictureScreen(
+            //       // Pass the automatically generated path to
+            //       // the DisplayPictureScreen widget.
+            //       imagePath: image?.path,
+            //     ),
+            //   ),
+            // );
           } catch (e) {
             // If an error occurs, log the error to the console.
             print(e);

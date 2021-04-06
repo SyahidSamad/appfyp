@@ -1,4 +1,3 @@
-import 'package:appfyp/styles/globalColor.dart';
 import 'package:flutter/material.dart';
 
 TextStyle getFont(double fontSize, FontWeight fontWeight, [Color colors]) {

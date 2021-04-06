@@ -1,30 +1,56 @@
+import 'package:appfyp/enum.dart';
+import 'package:appfyp/model/itemmodel.dart';
+import 'package:appfyp/presenter/itemPresenter.dart';
+import 'package:appfyp/provider/rootProvider.dart';
 import 'package:appfyp/styles/globalColor.dart';
 import 'package:appfyp/styles/globalStyles.dart';
 import 'package:appfyp/view/addItemScreen.dart';
+import 'package:appfyp/view/baseView.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CategoryPage extends StatelessWidget {
+  final int index;
+
+  const CategoryPage({Key key, this.index}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 36),
-      child: Column(
-        children: [
-          categoryName(context),
-          Expanded(child: listOfItem()),
-          SizedBox(height: 14)
-        ],
-      ),
-    );
+    return BaseView<ItemPresenter>(
+        onPresenterReady: (presenter) {
+          print(index);
+          presenter.getItem(index: index);
+        },
+        builder: (context, presenter, child) => presenter.theViewState ==
+                ViewState.BUSY
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : presenter.listOfItemModel.isEmpty &&
+                    presenter.categoryName == null
+                ? Center(
+                    child: Text(
+                      'No category chosen',
+                      style: getFont(14, FontWeight.bold),
+                    ),
+                  )
+                : Container(
+                    padding: EdgeInsets.symmetric(horizontal: 36),
+                    child: Column(
+                      children: [
+                        categoryName(context, presenter.categoryName),
+                        Expanded(child: listOfItem(presenter.listOfItemModel)),
+                        SizedBox(height: 14)
+                      ],
+                    ),
+                  ));
   }
 
-  Widget categoryName(BuildContext context) {
+  Widget categoryName(BuildContext context, String categoryName) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'Animals',
+          categoryName,
           style: getFont(24, FontWeight.bold),
         ),
         addItemButton(context),
@@ -54,7 +80,7 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  Widget listOfItem() {
+  Widget listOfItem(List<ItemModel> listOfItem) {
     return Scrollbar(
       thickness: 8,
       child: GridView.builder(
@@ -65,7 +91,7 @@ class CategoryPage extends StatelessWidget {
               childAspectRatio: 3 / 2,
               crossAxisSpacing: 20,
               mainAxisSpacing: 20),
-          itemCount: 12,
+          itemCount: listOfItem.length,
           itemBuilder: (context, int) => itemCard()),
     );
   }

@@ -25,11 +25,11 @@ class CategoryPresenter extends BasePresenter {
     setViewState(ViewState.BUSY);
     categoriesToCache.add(data);
     print(categoriesToCache);
-    final result = await CacheService.insertData(
-        key: 'categories', data: categoriesToCache);
+    await CacheService.insertData(
+        key: 'categories', dataToCache: categoriesToCache);
 
-    print('results from insert data $result');
+    //print('results from insert data $result');
     setViewState(ViewState.IDLE);
-    return result;
+    //return result;
   }
 }

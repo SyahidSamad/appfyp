@@ -1,9 +1,13 @@
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:appfyp/enum.dart';
+import 'package:appfyp/model/categorymodel.dart';
+import 'package:appfyp/presenter/categoryPresenter.dart';
 import 'package:appfyp/styles/globalColor.dart';
 import 'package:appfyp/styles/globalStyles.dart';
 import 'package:appfyp/view/addCategory.dart';
-import 'package:appfyp/view/addItemScreen.dart';
+import 'package:appfyp/view/baseView.dart';
 import 'package:appfyp/widget/dragabbleBottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,11 +20,26 @@ class CategoryList extends StatelessWidget {
         child: Stack(
           alignment: Alignment.centerLeft,
           children: [
-            ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10 + 1,
-                itemBuilder: (context, int) =>
-                    int == 0 ? Container(width: 50) : circleItem(context)),
+            BaseView<CategoryPresenter>(
+              builder: (context, presenter, child) => presenter.theViewState ==
+                      ViewState.BUSY
+                  ? CircularProgressIndicator()
+                  : presenter.categories.isEmpty
+                      ? Center(
+                          child: Text(
+                            'Create your category now',
+                            style: getFont(14, FontWeight.bold),
+                          ),
+                        )
+                      : ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: presenter.categories.length,
+                          itemBuilder: (context, i) =>
+                              circleItem(i, context, presenter.categories[i])),
+              onPresenterReady: (presenter) {
+                presenter.getCategory();
+              },
+            ),
             addButton(context),
           ],
         ));
@@ -50,8 +69,10 @@ class CategoryList extends StatelessWidget {
     );
   }
 
-  Widget circleItem(BuildContext context) {
-    return Padding(
+  Widget circleItem(
+      int itemIndex, BuildContext context, CategoryModel category) {
+    return Container(
+      margin: EdgeInsets.only(left: itemIndex == 0 ? 50 : 0),
       padding: const EdgeInsets.all(8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +116,7 @@ class CategoryList extends StatelessWidget {
                   height: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/gambartry.jpeg"),
+                      image: FileImage(File(category.categoryPathToPicture)),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -104,7 +125,7 @@ class CategoryList extends StatelessWidget {
             ),
           ),
           Text(
-            'Animals',
+            category.categoryName,
             style: getFont(14, FontWeight.w500),
           )
         ],

@@ -1,7 +1,11 @@
+import 'package:appfyp/locator.dart';
+import 'package:appfyp/provider/rootProvider.dart';
 import 'package:appfyp/view/mainScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
@@ -9,10 +13,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FYPproject',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: MainScreen(),
+    return ChangeNotifierProvider<RootProvider>(
+      create: (context) => RootProvider(),
+      child: MaterialApp(
+        title: 'FYPproject',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: MainScreen(),
+      ),
     );
   }
 }

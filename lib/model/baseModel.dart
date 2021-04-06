@@ -1,3 +1,3 @@
 abstract class BaseModel {
-  Map toMap() {}
+  Map toMap();
 }

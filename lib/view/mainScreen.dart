@@ -32,8 +32,7 @@ class _MainScreenState extends State<MainScreen> {
         body: Stack(children: [
           Column(
             children: [
-              CategoryList(),
-              Expanded(child: CategoryPage()),
+              Expanded(child: CategoryList()),
               createSentence ? CreateSentence() : Container(),
               SizedBox(
                 height: 10,

@@ -124,13 +124,14 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                             ));
                             await presenter.createCategory(
                                 data: CategoryModel(data).toMap());
-                            Navigator.push(
+                            Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => MainScreen()),
+                              (route) => false,
                             );
                           }
-                          print('$data');
+                          print('The data: $data');
                         },
                       );
                     })

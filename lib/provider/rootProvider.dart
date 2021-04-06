@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class RootProvider with ChangeNotifier {
-  int _currentIndex = 0;
+  int currentIndex = 0;
   String _cameraImagePath;
 
   void setCurrentIndex(int index) {
-    _currentIndex = index;
+    currentIndex = index;
     notifyListeners();
   }
 
@@ -14,7 +14,7 @@ class RootProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  int get getIndex => _currentIndex;
+  int get getIndex => currentIndex;
   String get getCameraImagePath => _cameraImagePath;
 
   @override
